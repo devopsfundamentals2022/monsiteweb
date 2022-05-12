@@ -1,6 +1,6 @@
 FROM centos:7
 RUN yum -y --setopt=tsflags=nodocs update  && \
-    yum -y --setopt=tsflags=nodocs update install httpd git && \
+    yum -y --setopt=tsflags=nodocs install httpd git && \
     yum clean all
 EXPOSE 80
 RUN git clone --branch dimitri https://github.com/devopsfundamentals2022/monsiteweb.git
