@@ -1,0 +1,35 @@
+---
+- name: playbook de configuration du host pour le site web
+  hosts: monsiteweb
+  remote_user: azureuser
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Wait 600 seconds for target connection to become reachable/usable
+      wait_for_connection:
+    - package:
+        name: epel-release
+        state: present
+    - name: clean
+      command: yum clean all
+    - name: make_cache
+      command: yum makecache
+    - package:
+        name: "{{ item}}"
+        state: present
+      loop:
+        - yum-utils
+        - device-mapper-persistent-data
+        - lvm2
+        - git
+        - docker
+        - python2-httplib2
+        - ansible
+        - python-docker-py
+    - name: Start service docker, if not started
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: yes
+    - name: installation of docker collection
+      ansible.builtin.command: ansible-galaxy collection install community.docker 
