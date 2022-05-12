@@ -4,7 +4,7 @@ variable "resource_group_name_prefix" {
 }
 
 variable "resource_group_location" {
-  default       = "Central US"
+  default       = "West US 3"
   description   = "Location of the resource group."
 }
 
