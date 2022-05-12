@@ -5,4 +5,4 @@ RUN yum -y --setopt=tsflags=nodocs update && \
 EXPOSE 80
 RUN git clone --branch olivier https://github.com/devopsfundamentals2022/monsiteweb.git
 RUN cp monsiteweb/index.html /var/www/html/index.html
-CMD ["/usr/sbin/htppd", "-D", "FOREGROUND"]
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
